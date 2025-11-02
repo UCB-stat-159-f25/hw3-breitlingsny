@@ -1,0 +1,20 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 45f277c0-6ae2-4a00-bb1e-c733aedc52a2
+  title: LIGO Gravitational Wave Detection Tutorial
+  description: This page (with associated IPython script LOSC_Event_tutorial.ipynb ) will go through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases from the LIGO Open Science Center (LOSC)
+  keywords: [LIGO]
+  authors:
+    - name: Breitling Snyder
+      affiliation: University of California, Berkeley
+  toc:
+    - file: README.md
+    - file: LOSC_Event_tutorial.ipynb
+  github: https://github.com/UCB-stat-159-f25/hw3-breitlingsny
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+site:
+  template: book-theme
+  options:
+  #   favicon: favicon.ico
+    logo: LIGO_logo.jpg
