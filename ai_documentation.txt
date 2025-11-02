@@ -1,0 +1,130 @@
+**Note**: ChatGPT often gives me multiple options to solve issues. For clarity, I have only provided the options I chose to use. 
+
+**Q1:**
+Is this the correct formatting of dependencies for a pyproject.toml file? 
+requires-python = ">=3.9" 
+dependencies = [ 
+    -python>=3.9 
+    - numpy=2.0 
+    - scipy=1.13 
+    - h5py=3.12 
+    - matplotlib=3.9 
+    - scipy=1.13 
+    - ipykernel=6.29
+]
+
+**A1:**
+Good question — you’re very close, but that syntax isn’t quite correct TOML formatting.
+
+Here’s the correct way to declare dependencies in a pyproject.toml file (for example, when using [project] metadata under PEP 621
+):
+
+[project]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy==2.0",
+    "scipy==1.13",
+    "h5py==3.12",
+    "matplotlib==3.9",
+    "ipykernel==6.29"
+]
+
+**Q2:**
+(main)jupyter-breitling[hw3-breitlingsny]> pip install ligotools 
+
+ERROR: Could not find a version that satisfies the requirement ligotools (from versions: none) ERROR: No matching distribution found for ligotools
+
+**A2:**
+pip install ligotools tries to download a package named ligotools from PyPI. Yours is local and not published, so pip can’t find it.
+
+Do this from your repo root (the folder with pyproject.toml):
+
+Make sure it’s a real package
+
+Ensure ligotools/__init__.py exists (can be empty).
+
+Install your local package (editable mode)
+
+python -m pip install -e .
+
+**Q3:**
+(main)jupyter-breitling[hw3-breitlingsny]> python -m pip install -e . 
+
+Obtaining file:///home/jovyan/hw3-breitlingsny Installing build dependencies ... done Checking if build backend supports build_editable ... done Getting requirements to build editable ... error error: subprocess-exited-with-error × Getting requirements to build editable did not run successfully. │ exit code: 1 ╰─> [72 lines of output] Traceback (most recent call last): File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/expand.py", line 71, in __getattr__ return next( ^^^^^ StopIteration The above exception was the direct cause of the following exception: Traceback (most recent call last): File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/expand.py", line 185, in read_attr value = getattr(StaticModule(module_name, spec), attr_name) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/expand.py", line 77, in __getattr__ raise AttributeError(f"{self.name} has no attribute {attr}") from e AttributeError: ligotools has no attribute __version__ During handling of the above exception, another exception occurred: Traceback (most recent call last): File "/srv/conda/envs/notebook/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module> main() File "/srv/conda/envs/notebook/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main json_out["return_val"] = hook(**hook_input["kwargs"]) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/srv/conda/envs/notebook/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 157, in get_requires_for_build_editable return hook(config_settings) ^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 473, in get_requires_for_build_editable return self.get_requires_for_build_wheel(config_settings) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 331, in get_requires_for_build_wheel return self._get_build_requires(config_settings, requirements=[]) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 301, in _get_build_requires self.run_setup() File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/build_meta.py", line 317, in run_setup exec(code, locals()) File "<string>", line 1, in <module> File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/__init__.py", line 115, in setup return distutils.core.setup(**attrs) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 160, in setup dist.parse_config_files() File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/dist.py", line 756, in parse_config_files pyprojecttoml.apply_configuration(self, filename, ignore_option_errors) File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 72, in apply_configuration config = read_configuration(filepath, True, ignore_option_errors, dist) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 144, in read_configuration return expand_configuration(asdict, root_dir, ignore_option_errors, dist) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 169, in expand_configuration return _ConfigExpander(config, root_dir, ignore_option_errors, dist).expand() ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 217, in expand self._expand_all_dynamic(dist, package_dir) File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 262, in _expand_all_dynamic version=self._obtain_version(dist, package_dir), ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 313, in _obtain_version self._obtain(dist, "version", package_dir) # pyright: ignore[reportArgumentType] ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 300, in _obtain return self._expand_directive( ^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py", line 294, in _expand_directive return _expand.read_attr(directive["attr"], package_dir, root_dir) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File "/tmp/pip-build-env-4d8a39lm/overlay/lib/python3.12/site-packages/setuptools/config/expand.py", line 191, in read_attr return getattr(module, attr_name) ^^^^^^^^^^^^^^^^^^^^^^^^^^ AttributeError: module 'ligotools' has no attribute '__version__' [end of output] note: This error originates from a subprocess, and is likely not a problem with pip. error: subprocess-exited-with-error × Getting requirements to build editable did not run successfully. │ exit code: 1 ╰─> See above for output. note: This error originates from a subprocess, and is likely not a problem with pip.
+
+**A3:**
+You’ve got two separate issues:
+1) Editable install failed: ligotools has no attribute __version__
+
+Your pyproject.toml declares a dynamic version:
+
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = { attr = "ligotools.__version__" }
+
+
+…but ligotools/__init__.py doesn’t define __version__.
+
+Quick fix: add __version__ to your package.
+
+# ligotools/__init__.py
+__version__ = "0.1.0"
+
+Then from repo root:
+
+python -m pip install -e .
+
+2) Your read_frame test will try to import gwpy
+
+In read_frame, the line
+
+from gwpy.timeseries import TimeSeries
+
+runs before the ifo check, so your test
+
+with pytest.raises(TypeError):
+    rl.read_frame('test.gwf', ifo=None)
+
+will still try to import gwpy. If gwpy isn’t installed, you’ll get ModuleNotFoundError.
+
+Install gwpy:
+
+python -m pip install gwpy
+
+After fixing version + gwpy import
+
+Run from the repo root:
+
+python -m pip install -e .
+pytest -q
+
+**Q4:**
+Write a test that checks to make sure the whitened output is the same length as the input strain
+def whiten(strain, interp_psd, dt):
+    """Function to whiten data"""
+    Nt = len(strain)
+    freqs = np.fft.rfftfreq(Nt, dt)
+    freqs1 = np.linspace(0, 2048, Nt // 2 + 1)
+
+    # whitening: transform to freq domain, divide by asd, then transform back, 
+    # taking care to get normalization right.
+    hf = np.fft.rfft(strain)
+    norm = 1./np.sqrt(1./(dt*2))
+    white_hf = hf / np.sqrt(interp_psd(freqs)) * norm
+    white_ht = np.fft.irfft(white_hf, n=Nt)
+    return white_ht
+
+**A4:**
+import numpy as np
+from ligotools.utils import whiten
+
+def test_whiten_output_length_matches_input():
+    fs = 4096
+    dt = 1.0 / fs
+    t = np.linspace(0, 1, fs)
+    strain = np.sin(2 * np.pi * 60 * t)       # simple sine wave
+    interp_psd = lambda f: np.ones_like(f)    # flat PSD
+    whitened = whiten(strain, interp_psd, dt)
+    assert len(whitened) == len(strain)
+
