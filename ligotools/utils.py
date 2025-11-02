@@ -43,11 +43,9 @@ def plot_event(det, template_match, strain_L1_whitenbp, strain_H1_whitenbp,
     if det == 'L1': 
         pcolor='g'
         strain_whitenbp = strain_L1_whitenbp
-        template_L1 = template_match.copy()
     else:
         pcolor='r'
         strain_whitenbp = strain_H1_whitenbp
-        template_H1 = template_match.copy()
 
     # -- Plot the result
     plt.figure(figsize=(10,8))
