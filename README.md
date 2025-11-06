@@ -10,7 +10,7 @@ LIGO is an acronym for Laser Interferometer Gravitational-wave Observatory. This
 - `LOSC_Event_tutorial.ipynb` — main notebook where all analysis is done. This notebook goes through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases.
 - `ligotools/` — functions used for filtering, whitening, and plotting
     - `readligo.py` — This module provides tools for reading LIGO data files.
-    - `utils.py` — THis module provides additonal functions for processing and plotting LIGO data
+    - `utils.py` — This module provides additional functions for processing and plotting LIGO data
 - `data/` — waveform data (downloaded or generated during the notebook)
     - The `.hdf5` files contains the LIGO data itself. H1 and L1 refer to the two main LIGO detectors. 
     - The `.json` file contains the event properties
