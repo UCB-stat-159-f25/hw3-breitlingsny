@@ -6,7 +6,9 @@ ligotools.egg-info/
 
 # Notebook outputs
 figures/*
+!figures/.gitkeep
 audio/*
+!audio/.gitkeep
 data/GW150914_data.csv
 
 # Homework description
