@@ -128,3 +128,19 @@ def test_whiten_output_length_matches_input():
     whitened = whiten(strain, interp_psd, dt)
     assert len(whitened) == len(strain)
 
+**Q5:**
+How would I make a make command that executes the following? 
+
+env: creates and configures the environment (but does not activate it). If you have already created an environment of the same name, have the command instead update the environment with a provided environment.yml file. 
+
+Make this command as simple as possible. I only want a few lines. I am using conda to build the environment. 
+
+**A5:**
+
+# Infer env name from `environment.yml` (override by running: make env ENV_NAME=foo)
+ENV_NAME ?= $(shell awk '/^name:/ {print $$2; exit}' $(ENV_YML))
+
+.PHONY: env
+env:
+	conda env update -n $(ENV_NAME) -f environment.yml --prune || \
+	conda env create -n $(ENV_NAME) -f environment.yml
