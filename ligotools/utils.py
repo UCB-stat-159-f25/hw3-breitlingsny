@@ -36,16 +36,12 @@ def reqshift(data,fshift=100,sample_rate=4096):
     z = np.fft.irfft(y)
     return z
 
-def plot_event(det, template_match, strain_L1_whitenbp, strain_H1_whitenbp,
-                 time, timemax, SNR, eventname, plottype, tevent, template_fft,
+def plot_event(det, template_match, strain_whitenbp, 
+               time, timemax, SNR, eventname, plottype, tevent, template_fft,
                  datafreq, freqs, data_psd, d_eff, fs):
     """Function to plot changes for the detectors"""
-    if det == 'L1': 
-        pcolor='g'
-        strain_whitenbp = strain_L1_whitenbp
-    else:
-        pcolor='r'
-        strain_whitenbp = strain_H1_whitenbp
+    if det == 'L1': pcolor='g'
+    else: pcolor='r'
 
     # -- Plot the result
     plt.figure(figsize=(10,8))

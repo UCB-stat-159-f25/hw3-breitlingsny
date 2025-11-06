@@ -1,2 +1,13 @@
-# MyST build outputs
-_build
+# Build artifacts
+_build/
+.ipynb_checkpoints/
+.pytest_cache/
+ligotools.egg-info/
+
+# Notebook outputs
+figures/*
+audio/*
+data/GW150914_data.csv
+
+# Homework description
+homework03_description.md
